@@ -8,71 +8,82 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: black; color: white; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: black; color: white; scroll-behavior: smooth; overflow-x: hidden; }
+        
         .apple-gradient { background: linear-gradient(180deg, #ffffff 0%, #888888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
         .fade-in { animation: fadeInUp 1s ease-out forwards; opacity: 0; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Tech Blueprint Grid Background */
+        .bg-grid {
+            background-image: linear-gradient(to right, #111 1px, transparent 1px), linear-gradient(to bottom, #111 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
     </style>
 </head>
-<body>
+<body class="bg-grid">
 
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-            <span class="font-black tracking-tighter text-xl">3D FORGED</span>
-            <div class="hidden md:flex space-x-8 text-xs font-medium text-white/60 uppercase tracking-widest">
-                <a href="#tech" class="hover:text-white transition-colors">Technology</a>
-                <a href="#contact" class="hover:text-white transition-colors">AI Architect</a>
+            <span class="font-black tracking-tighter text-xl uppercase italic">3D Forged</span>
+            <div class="hidden md:flex space-x-8 text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">
+                <a href="#tech" class="hover:text-blue-500 transition-colors">Technology</a>
+                <a href="#contact" class="hover:text-blue-500 transition-colors">AI Architect</a>
+                <a href="#legal" class="hover:text-blue-500 transition-colors">Safety</a>
             </div>
-            <a href="#contact" class="bg-blue-600 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-blue-500 transition-all">Get Quote</a>
+            <a href="#contact" class="bg-blue-600 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-blue-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">Get Quote</a>
         </div>
     </nav>
 
     <section class="h-screen flex flex-col items-center justify-center text-center px-6">
-        <span class="text-blue-500 font-bold tracking-[0.3em] mb-4 text-[10px] uppercase fade-in">The Future of Props</span>
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 apple-gradient fade-in" style="animation-delay: 0.2s;">Forge Your Reality.</h1>
-        <p class="max-w-xl text-lg text-gray-400 font-medium fade-in" style="animation-delay: 0.4s;">
-            Industrial 3D printing meets AI-logic and MCU-integrated electronics. We build the gear that defines the character.
+        <span class="text-blue-500 font-bold tracking-[0.4em] mb-4 text-[10px] uppercase fade-in">Localized Engineering</span>
+        <h1 class="text-6xl md:text-9xl font-black tracking-tighter mb-6 apple-gradient fade-in" style="animation-delay: 0.2s;">Forge Your Reality.</h1>
+        <p class="max-w-xl text-lg text-gray-400 font-medium fade-in leading-relaxed" style="animation-delay: 0.4s;">
+            Industrial 3D printing meets AI-logic and MCU-integrated electronics. We build gear that thinks for itself.
         </p>
     </section>
 
     <section id="tech" class="max-w-6xl mx-auto px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-16">
-        <div class="space-y-4">
+        <div class="space-y-4 reveal">
             <i data-lucide="printer" class="text-blue-500 w-8 h-8"></i>
             <h3 class="text-2xl font-bold">Industrial Print</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">High-strength resin and filament prints, custom-scaled to your body measurements for the perfect fit.</p>
+            <p class="text-gray-500 text-sm leading-relaxed">High-strength resin and carbon-fiber filaments. Custom-scaled to your body for the perfect cinematic fit.</p>
         </div>
-        <div class="space-y-4">
+        <div class="space-y-4 reveal" style="transition-delay: 0.2s;">
             <i data-lucide="cpu" class="text-purple-500 w-8 h-8"></i>
             <h3 class="text-2xl font-bold">MCU Integration</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">ESP32 & Arduino driven OLED displays, holographic effects, and phone-controlled LED arrays.</p>
+            <p class="text-gray-500 text-sm leading-relaxed">ESP32 & Arduino driven OLED visors, holographic lenses, and music-sync RGB arrays.</p>
         </div>
-        <div class="space-y-4">
+        <div class="space-y-4 reveal" style="transition-delay: 0.4s;">
             <i data-lucide="sparkles" class="text-cyan-400 w-8 h-8"></i>
-            <h3 class="text-2xl font-bold">AI Response</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Integrated voice commands and smart behavior scripts that allow your prop to interact with the environment.</p>
+            <h3 class="text-2xl font-bold">AI Autonomy</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">Voice-activated HUDs and smart behavior scripts that allow your prop to react to the crowd.</p>
         </div>
     </section>
 
-    <section id="contact" class="py-32 bg-zinc-950 px-6">
+    <section id="contact" class="py-32 bg-zinc-950/50 px-6 backdrop-blur-sm">
         <div class="max-w-3xl mx-auto">
-            <div class="p-8 md:p-12 bg-black border border-white/10 rounded-[2rem] shadow-2xl">
+            <div class="p-8 md:p-12 bg-black border border-white/10 rounded-[2.5rem] shadow-2xl reveal">
                 <div class="flex items-center gap-2 mb-8">
-                    <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                    <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-                    <span class="text-[10px] text-zinc-600 ml-2 font-mono uppercase tracking-[0.2em]">System Status: Online</span>
+                    <div class="w-2.5 h-2.5 rounded-full bg-red-500/50 animate-pulse"></div>
+                    <span class="text-[10px] text-zinc-600 ml-2 font-mono uppercase tracking-[0.2em]">AI ARCHITECT: READY</span>
                 </div>
-                <h2 class="text-3xl font-bold mb-4">Consult the AI Architect</h2>
-                <p class="text-zinc-500 mb-8 text-sm">Describe your dream project. Our AI will analyze the tech requirements and send a report to our workshop.</p>
+                <h2 class="text-4xl font-bold mb-4">Input Your Specs</h2>
+                <p class="text-zinc-500 mb-8 text-sm">Our AI analyzes your character design to calculate print hours, circuitry layout, and code requirements.</p>
                 
                 <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" class="space-y-4">
                     <textarea 
                         name="message"
-                        class="w-full bg-zinc-900 border-none rounded-2xl p-6 text-white placeholder:text-zinc-700 focus:ring-1 focus:ring-blue-600 transition-all outline-none text-sm"
-                        placeholder="Character name, tech needed (LEDs, sound, OLEDs)..."
+                        class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl p-6 text-white placeholder:text-zinc-700 focus:ring-1 focus:ring-blue-600 transition-all outline-none text-sm font-mono"
+                        placeholder="Character: Iron Man MK 85 // Feature: OLED Visor + Voice activation..."
                         rows="4" required></textarea>
-                    <input type="email" name="email" placeholder="Your Email" class="w-full bg-zinc-900 border-none rounded-2xl p-4 text-white placeholder:text-zinc-700 focus:ring-1 focus:ring-blue-600 outline-none text-sm" required>
-                    <button type="submit" class="w-full py-4 bg-white text-black font-black rounded-2xl hover:bg-blue-500 hover:text-white transition-all text-xs uppercase tracking-widest">
+                    <input type="email" name="email" placeholder="Your Neural Link (Email)" class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl p-4 text-white placeholder:text-zinc-700 focus:ring-1 focus:ring-blue-600 outline-none text-sm font-mono" required>
+                    <button type="submit" class="w-full py-5 bg-white text-black font-black rounded-2xl hover:bg-blue-600 hover:text-white transition-all text-xs uppercase tracking-[0.3em]">
                         Transmit to Workshop
                     </button>
                 </form>
@@ -80,12 +91,63 @@
         </div>
     </section>
 
-    <footer class="py-12 text-center text-zinc-700 text-[10px] tracking-widest uppercase">
-        <p>© 2024 3D FORGED TECH // LOCALIZED COSPLAY ENGINEERING</p>
+    <section id="legal" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            
+            <div class="reveal mb-32 group">
+                <div class="relative overflow-hidden rounded-[3rem] border border-white/10 aspect-video bg-zinc-900">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2000" 
+                         alt="Cyberpunk Helmet" 
+                         class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[3s]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <p class="text-[10px] tracking-[0.5em] text-blue-500 font-bold uppercase mb-2">Prototype V.04</p>
+                        <h3 class="text-3xl font-bold">The Neural Visor.</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 text-[11px] leading-relaxed text-zinc-500 uppercase tracking-widest reveal">
+                <div class="space-y-6">
+                    <h4 class="text-white font-bold border-b border-white/10 pb-4">Terms of Forge</h4>
+                    <p>1. All projects are custom-tailored to user-provided measurements. Accuracy is dependent on input data.</p>
+                    <p>2. AI Architect quotes are estimates. Final complexity may adjust the time-of-delivery.</p>
+                    <p>3. Intellectual property of character designs remains with the original creators; we provide engineering services only.</p>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="text-red-900 font-bold border-b border-red-900/30 pb-4">Safety Disclaimer</h4>
+                    <p>1. <span class="text-zinc-300">Electronics:</span> Customer assumes all risk for Lithium-Polymer (LiPo) battery management. Do not leave powered props unattended.</p>
+                    <p>2. <span class="text-zinc-300">Visibility:</span> Helmet visors (OLED/LED) may significantly reduce field of vision. Not for use while operating vehicles.</p>
+                    <p>3. <span class="text-zinc-300">Heat:</span> High-power LEDs generate heat. Ensure ventilation is not obstructed in printed cavities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center text-zinc-800 text-[10px] tracking-[0.5em] uppercase">
+        <div class="flex justify-center gap-8 mb-4 opacity-30">
+            <i data-lucide="instagram" class="w-4 h-4"></i>
+            <i data-lucide="twitter" class="w-4 h-4"></i>
+            <i data-lucide="github" class="w-4 h-4"></i>
+        </div>
+        <p>© 2024 3D FORGED TECH // LOCALIZED COSPLAY ENGINEERING // ALL RIGHTS RESERVED</p>
     </footer>
 
     <script>
+        // Initialize Icons
         lucide.createIcons();
+
+        // Scroll Reveal Logic
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
 </body>
 </html>
