@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Forged | Next-Gen Cosplay Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: black; color: white; scroll-behavior: smooth; }
+        .apple-gradient { background: linear-gradient(180deg, #ffffff 0%, #888888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .fade-in { animation: fadeInUp 1s ease-out forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+            <span class="font-black tracking-tighter text-xl">3D FORGED</span>
+            <div class="hidden md:flex space-x-8 text-xs font-medium text-white/60 uppercase tracking-widest">
+                <a href="#tech" class="hover:text-white transition-colors">Technology</a>
+                <a href="#contact" class="hover:text-white transition-colors">AI Architect</a>
+            </div>
+            <a href="#contact" class="bg-blue-600 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-blue-500 transition-all">Get Quote</a>
+        </div>
+    </nav>
+
+    <section class="h-screen flex flex-col items-center justify-center text-center px-6">
+        <span class="text-blue-500 font-bold tracking-[0.3em] mb-4 text-[10px] uppercase fade-in">The Future of Props</span>
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 apple-gradient fade-in" style="animation-delay: 0.2s;">Forge Your Reality.</h1>
+        <p class="max-w-xl text-lg text-gray-400 font-medium fade-in" style="animation-delay: 0.4s;">
+            Industrial 3D printing meets AI-logic and MCU-integrated electronics. We build the gear that defines the character.
+        </p>
+    </section>
+
+    <section id="tech" class="max-w-6xl mx-auto px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div class="space-y-4">
+            <i data-lucide="printer" class="text-blue-500 w-8 h-8"></i>
+            <h3 class="text-2xl font-bold">Industrial Print</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">High-strength resin and filament prints, custom-scaled to your body measurements for the perfect fit.</p>
+        </div>
+        <div class="space-y-4">
+            <i data-lucide="cpu" class="text-purple-500 w-8 h-8"></i>
+            <h3 class="text-2xl font-bold">MCU Integration</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">ESP32 & Arduino driven OLED displays, holographic effects, and phone-controlled LED arrays.</p>
+        </div>
+        <div class="space-y-4">
+            <i data-lucide="sparkles" class="text-cyan-400 w-8 h-8"></i>
+            <h3 class="text-2xl font-bold">AI Response</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">Integrated voice commands and smart behavior scripts that allow your prop to interact with the environment.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-zinc-950 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="p-8 md:p-12 bg-black border border-white/10 rounded-[2rem] shadow-2xl">
+                <div class="flex items-center gap-2 mb-8">
+                    <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                    <span class="text-[10px] text-zinc-600 ml-2 font-mono uppercase tracking-[0.2em]">System Status: Online</span>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Consult the AI Architect</h2>
+                <p class="text-zinc-500 mb-8 text-sm">Describe your dream project. Our AI will analyze the tech requirements and send a report to our workshop.</p>
+                
+                <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" class="space-y-4">
+                    <textarea 
+                        name="message"
+                        class="w-full bg-zinc-900 border-none rounded-2xl p-6 text-white placeholder:text-zinc-700 focus:ring-1 focus:ring-blue-600 transition-all outline-none text-sm"
+                        placeholder="Character name, tech needed (LEDs, sound, OLEDs)..."
+                        rows="4" required></textarea>
+                    <input type="email" name="email" placeholder="Your Email" class="w-full bg-zinc-900 border-none rounded-2xl p-4 text-white placeholder:text-zinc-700 focus:ring-1 focus:ring-blue-600 outline-none text-sm" required>
+                    <button type="submit" class="w-full py-4 bg-white text-black font-black rounded-2xl hover:bg-blue-500 hover:text-white transition-all text-xs uppercase tracking-widest">
+                        Transmit to Workshop
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-zinc-700 text-[10px] tracking-widest uppercase">
+        <p>© 2024 3D FORGED TECH // LOCALIZED COSPLAY ENGINEERING</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
