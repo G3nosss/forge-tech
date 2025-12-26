@@ -58,7 +58,7 @@
     <section id="about" class="py-32 px-6 bg-zinc-950/30 border-y border-white/5">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="reveal">
-                <img src="1000072009.jpg" alt="The Forge Studio" class="rounded-[2rem] border border-white/10 shadow-2xl opacity-80 hover:opacity-100 transition-opacity duration-500">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000" alt="The Forge Studio" class="rounded-[2rem] border border-white/10 shadow-2xl opacity-80 hover:opacity-100 transition-opacity duration-500">
             </div>
             <div class="reveal space-y-6" style="transition-delay: 0.2s;">
                 <span class="text-blue-500 font-bold text-[10px] uppercase tracking-[0.4em]">The Vision</span>
@@ -87,7 +87,7 @@
                 
                 <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal group">
                     <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" class="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1620067925093-801122ac1408?w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <h3 class="font-bold text-sm mb-1 uppercase tracking-tight">MK-1 Cyber Visor</h3>
                     <p class="text-blue-500 font-mono text-xs mb-4">₹12,499</p>
@@ -96,7 +96,7 @@
 
                 <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal" style="transition-delay: 0.1s;">
                     <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=400" class="w-full h-full object-cover opacity-70">
+                         <img src="https://images.unsplash.com/photo-1535136029863-4a3813f13988?w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-70">
                     </div>
                     <h3 class="font-bold text-sm mb-1 uppercase tracking-tight">Neural Core Prop</h3>
                     <p class="text-blue-500 font-mono text-xs mb-4">₹8,500</p>
@@ -114,7 +114,7 @@
 
                 <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal" style="transition-delay: 0.3s;">
                     <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400" class="w-full h-full object-cover opacity-70">
+                         <img src="https://images.unsplash.com/photo-1590959651373-a3db0f38a961?w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-70">
                     </div>
                     <h3 class="font-bold text-sm mb-1 uppercase tracking-tight">Armor Plate Set</h3>
                     <p class="text-blue-500 font-mono text-xs mb-4">₹15,200</p>
@@ -176,8 +176,9 @@
             <h3 class="text-2xl font-black mb-2">Initialize Transfer</h3>
             <p class="text-zinc-500 text-xs mb-8">Scan or use the UPI ID below to complete your order.</p>
             
-            <div class="bg-white p-4 rounded-3xl mb-6 inline-block">
-                <div class="w-40 h-40 bg-zinc-200 flex items-center justify-center text-black font-bold text-xs">QR CODE IMG</div>
+            
+            <div class="bg-white p-2 rounded-3xl mb-6 inline-block shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+    <img src="Picsart_25-12-26_21-22-27-830.png" alt="Scan to Pay" class="w-48 h-48 object-contain rounded-2xl">
             </div>
 
             <div class="bg-black/50 p-4 rounded-2xl border border-white/5 mb-8">
@@ -215,7 +216,6 @@
 
     <script>
         lucide.createIcons();
-
         let cart = [];
         const cartDrawer = document.getElementById('cart-drawer');
         const cartItems = document.getElementById('cart-items');
@@ -223,10 +223,8 @@
         const cartTotal = document.getElementById('cart-total');
         const paymentModal = document.getElementById('payment-modal');
 
-        function toggleCart() {
-            cartDrawer.classList.toggle('open');
-        }
-
+        function toggleCart() { cartDrawer.classList.toggle('open'); }
+        
         function addToCart(name, price) {
             cart.push({name, price});
             updateCartUI();
@@ -236,44 +234,29 @@
         function updateCartUI() {
             cartCount.innerText = cart.length;
             cartCount.classList.remove('opacity-0');
-            
             if(cart.length === 0) {
                 cartItems.innerHTML = '<p class="text-zinc-500 text-sm italic">No schematics selected yet.</p>';
                 cartCount.classList.add('opacity-0');
             } else {
                 cartItems.innerHTML = cart.map((item, index) => `
                     <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                        <div>
-                            <p class="text-sm font-bold uppercase">${item.name}</p>
-                            <p class="text-blue-500 text-xs font-mono">₹${item.price.toLocaleString()}</p>
-                        </div>
+                        <div><p class="text-sm font-bold uppercase">${item.name}</p><p class="text-blue-500 text-xs font-mono">₹${item.price.toLocaleString()}</p></div>
                         <button onclick="removeItem(${index})" class="text-zinc-600 hover:text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                    </div>
-                `).join('');
+                    </div>`).join('');
                 lucide.createIcons();
             }
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             cartTotal.innerText = '₹' + total.toLocaleString();
         }
 
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
+        function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
+        
         function showPayment() {
             if(cart.length === 0) return alert("Your cart is empty!");
-            paymentModal.classList.remove('hidden');
-            paymentModal.classList.add('flex');
-            toggleCart(); // Close the drawer so they see the modal
+            paymentModal.classList.remove('hidden'); paymentModal.classList.add('flex'); toggleCart();
         }
+        function closePayment() { paymentModal.classList.add('hidden'); paymentModal.classList.remove('flex'); }
 
-        function closePayment() {
-            paymentModal.classList.add('hidden');
-            paymentModal.classList.remove('flex');
-        }
-
-        // Reveal Animations Logic
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
