@@ -23,6 +23,8 @@
     .nav-inner { height:76px; display:flex; align-items:center; justify-content:space-between; }
     .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.05em; font-size:20px; }
     .brand-logo { width:132px; height:auto; display:block; }
+    .brand-symbol { width:31px; height:31px; object-fit:contain; display:block; filter:drop-shadow(0 0 9px rgba(255,107,39,.3)); }
+    .brand-name { font-size:20px; }
     .brand-mark { width:25px; height:25px; border-radius:50%; border:7px solid var(--amber); box-shadow:0 0 20px rgba(255,107,39,.35); position:relative; }
     .brand-mark:after { content:''; position:absolute; width:6px; height:6px; background:var(--cream); border-radius:50%; top:3px; left:3px; }
     .nav-links { display:flex; gap:28px; color:var(--muted); font-size:13px; font-weight:600; }
@@ -110,7 +112,7 @@
   </style>
 </head>
 <body>
-  <div class="scroll-progress" aria-hidden="true"></div><nav class="nav"><div class="container nav-inner"><a class="brand" href="#top" aria-label="3D Verse home"><img class="brand-logo" src="3d-verse-logo.svg" alt="3D Verse" /></a><div class="nav-links"><a href="#collection">Collection</a><a href="#studio">Studio</a><a href="#custom">Custom</a></div><a class="nav-cta" href="#custom">Start a build <span aria-hidden="true">↗</span></a></div></nav>
+  <div class="scroll-progress" aria-hidden="true"></div><nav class="nav"><div class="container nav-inner"><a class="brand" href="#top" aria-label="3D Verse home"><img class="brand-symbol" src="3d-verse-mark.png" alt="" /><span class="brand-name">3d verse</span></a><div class="nav-links"><a href="#collection">Collection</a><a href="#studio">Studio</a><a href="#custom">Custom</a></div><a class="nav-cta" href="#custom">Start a build <span aria-hidden="true">↗</span></a></div></nav>
   <main id="top">
     <section class="hero container">
       <div class="hero-copy-wrap"><div class="eyebrow mono">Small-batch light objects</div><h1>Light, <em>printed</em> differently.</h1><p class="hero-copy">Expressive ambient lamps, made layer by layer. Designed for desks, bedrooms, gaming setups and the corners that deserve a little more glow.</p><div class="actions"><a class="button primary" href="#collection">Shop the first drop <span>↗</span></a><a class="button ghost" href="#custom">Make it yours</a></div></div>
@@ -139,7 +141,7 @@
     <section id="studio" class="story reveal"><div class="container story-grid"><div><div class="eyebrow mono">Why 3D Verse</div><h2>Built slowly.<br />Lit warmly.</h2><p>Every lamp starts as a digital shape and ends as a real object you can reach for. We prototype in-house, print in small batches and keep the details intentional — from the first layer to the final glow.</p><div class="stat-row"><div class="stat"><strong>0.2<span>mm</span></strong><span class="mono">layer detail</span></div><div class="stat"><strong>24<span>h</span></strong><span class="mono">typical dispatch</span></div><div class="stat"><strong>01</strong><span class="mono">maker studio</span></div></div></div><div class="maker-card"><div class="mono">The maker note</div><div><h3>Your space is the brief.</h3><p>Tell us the mood, colour or idea. We’ll turn it into a light object made for your corner of the world.</p></div><a class="mono" href="#custom">Request a custom lamp →</a></div></div></section>
     <section id="custom" class="custom container reveal"><div class="custom-box"><div><div class="eyebrow mono">Have a shape in mind?</div><h2>Let’s make it glow.</h2><p class="custom-copy">Names, initials, colour swaps or a shape that only exists in your head. Send a few details and we’ll reply with a build idea and quote.</p></div><form id="custom-form"><label>Name<input name="name" required placeholder="Your name" /></label><label>Contact<input name="contact" required placeholder="Email or WhatsApp" /></label><label class="full">Your idea<textarea name="idea" required rows="5" placeholder="Tell us what you want to light up..."></textarea></label><button class="button primary" type="submit">Send build brief <span>↗</span></button></form></div></section>
   </main>
-  <footer><div class="container footer-inner"><div class="brand"><img class="brand-logo" src="3d-verse-logo.svg" alt="3D Verse" /></div><div class="footer-links"><a href="#collection" class="mono">Shop</a><a href="#custom" class="mono">Custom</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="mono">Instagram ↗</a></div><div class="mono">© 2026 3D Verse</div></div></footer>
+  <footer><div class="container footer-inner"><div class="brand"><img class="brand-symbol" src="3d-verse-mark.png" alt="" /><span class="brand-name">3d verse</span></div><div class="footer-links"><a href="#collection" class="mono">Shop</a><a href="#custom" class="mono">Custom</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="mono">Instagram ↗</a></div><div class="mono">© 2026 3D Verse</div></div></footer>
   <div id="toast" class="toast" role="status"></div>
   <script>
     const form = document.getElementById('custom-form');
