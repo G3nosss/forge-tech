@@ -1,266 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Forged | Engineering & Marketplace</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; overflow-x: hidden; }
-        
-        .text-gradient { background: linear-gradient(180deg, #fff 0%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .bg-grid { background-image: linear-gradient(to right, #111 1px, transparent 1px), linear-gradient(to bottom, #111 1px, transparent 1px); background-size: 40px 40px; }
-        
-        /* Product Card Hover Effect */
-        .product-card:hover { border-color: rgba(59, 130, 246, 0.5); transform: translateY(-5px); transition: all 0.3s ease; }
-
-        /* Cart Drawer Animation */
-        #cart-drawer { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        #cart-drawer.open { transform: translateX(0); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Forge Tech makes expressive 3D-printed ambient lamps and custom lights, made to order." />
+  <title>Forge Tech — Light, printed differently.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#171512; --cream:#f6f1e8; --muted:#aaa298; --line:rgba(246,241,232,.15); --amber:#ff6b27; --amber-soft:#ff9a4d; --panel:#22201c; --ease:cubic-bezier(.23,1,.32,1); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--ink); color:var(--cream); font-family:Manrope,system-ui,sans-serif; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button, input, textarea { font:inherit; }
+    button { cursor:pointer; }
+    .container { width:min(1160px, calc(100% - 48px)); margin:0 auto; }
+    .mono { font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:.12em; font-size:11px; }
+    .nav { position:fixed; z-index:20; top:0; width:100%; background:rgba(23,21,18,.82); backdrop-filter:blur(18px); border-bottom:1px solid var(--line); }
+    .nav-inner { height:76px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.05em; font-size:20px; }
+    .brand-mark { width:25px; height:25px; border-radius:50%; border:7px solid var(--amber); box-shadow:0 0 20px rgba(255,107,39,.35); }
+    .nav-links { display:flex; gap:28px; color:var(--muted); font-size:13px; font-weight:600; }
+    .nav-links a:hover { color:var(--cream); }
+    .nav-cta { border:1px solid var(--line); padding:11px 16px; border-radius:30px; font-size:12px; font-weight:700; transition:.2s var(--ease); }
+    .nav-cta:hover { background:var(--cream); color:var(--ink); }
+    .hero { min-height:780px; padding:150px 0 100px; position:relative; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; overflow:hidden; }
+    .hero:before { content:''; position:absolute; width:700px; height:700px; border-radius:50%; right:-210px; top:55px; background:radial-gradient(circle, rgba(255,107,39,.28), transparent 63%); filter:blur(10px); pointer-events:none; }
+    .eyebrow { display:flex; align-items:center; gap:10px; color:var(--amber-soft); margin-bottom:24px; }
+    .eyebrow:before { content:''; width:34px; height:1px; background:var(--amber); }
+    h1 { font-size:clamp(54px, 7vw, 94px); line-height:.94; letter-spacing:-.085em; margin:0 0 28px; max-width:680px; }
+    h1 em { color:var(--amber); font-style:normal; }
+    .hero-copy { max-width:480px; color:#bdb5aa; font-size:17px; line-height:1.7; margin:0 0 36px; }
+    .actions { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:15px 22px; border-radius:4px; border:1px solid transparent; font-size:12px; font-weight:800; transition:transform .18s var(--ease), background .18s var(--ease); }
+    .button:active { transform:scale(.97); }
+    .button.primary { background:var(--amber); color:#24140d; box-shadow:0 10px 30px rgba(255,107,39,.18); }
+    .button.primary:hover { background:var(--amber-soft); transform:translateY(-2px); }
+    .button.ghost { border-color:var(--line); color:var(--cream); }
+    .button.ghost:hover { border-color:var(--amber); color:var(--amber-soft); }
+    .hero-visual { position:relative; min-height:530px; display:flex; align-items:center; justify-content:center; }
+    .hero-photo { width:min(430px, 80%); aspect-ratio:4/5; object-fit:cover; border-radius:220px 220px 12px 12px; filter:saturate(.82) contrast(1.05); box-shadow:32px 28px 0 rgba(246,241,232,.07), 0 0 90px rgba(255,107,39,.22); }
+    .orbit { position:absolute; inset:9% 4%; border:1px solid rgba(255,154,77,.42); border-radius:50%; transform:rotate(-22deg); }
+    .floating-tag { position:absolute; right:1%; bottom:12%; background:var(--cream); color:var(--ink); padding:15px 18px; width:160px; box-shadow:0 18px 35px rgba(0,0,0,.26); }
+    .floating-tag strong { display:block; font-size:22px; letter-spacing:-.06em; margin-bottom:4px; }
+    .ticker { border-block:1px solid var(--line); padding:17px 0; overflow:hidden; color:var(--muted); white-space:nowrap; }
+    .ticker-inner { display:flex; justify-content:space-around; gap:34px; min-width:800px; }
+    .dot { color:var(--amber); margin:0 12px; }
+    section { padding:112px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:44px; }
+    .section-head h2 { font-size:clamp(36px,5vw,60px); line-height:.95; letter-spacing:-.075em; margin:12px 0 0; }
+    .section-head p { color:var(--muted); line-height:1.6; max-width:300px; margin:0; }
+    .products { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .product { background:var(--panel); border:1px solid var(--line); padding:12px; transition:transform .25s var(--ease), border-color .25s var(--ease); }
+    .product:hover { transform:translateY(-7px); border-color:rgba(255,154,77,.6); }
+    .product-image { aspect-ratio:1/1.1; overflow:hidden; position:relative; background:#13110f; }
+    .product-image img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
+    .product:hover img { transform:scale(1.05); }
+    .badge { position:absolute; top:14px; left:14px; background:var(--amber); color:#24140d; padding:7px 10px; font-size:10px; font-weight:800; }
+    .product-info { padding:18px 4px 5px; display:flex; justify-content:space-between; gap:12px; align-items:end; }
+    .product-info h3 { margin:0 0 7px; font-size:17px; letter-spacing:-.04em; }
+    .product-info p { margin:0; color:var(--muted); font-size:12px; }
+    .price { font-weight:800; font-size:16px; white-space:nowrap; }
+    .story { background:#1e1b17; }
+    .story-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:80px; align-items:center; }
+    .story h2 { font-size:clamp(38px,5vw,64px); line-height:1; letter-spacing:-.08em; margin:14px 0 26px; }
+    .story p { color:#bdb5aa; max-width:530px; line-height:1.8; font-size:16px; }
+    .stat-row { display:flex; gap:48px; margin-top:42px; }
+    .stat strong { display:block; font-size:31px; letter-spacing:-.08em; }
+    .stat span { color:var(--muted); }
+    .maker-card { background:var(--amber); color:#24140d; padding:38px; min-height:420px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; }
+    .maker-card:after { content:''; position:absolute; width:230px; height:230px; border:1px solid rgba(36,20,13,.4); border-radius:50%; right:-55px; bottom:-45px; box-shadow:0 0 0 22px rgba(36,20,13,.11), 0 0 0 46px rgba(36,20,13,.08); }
+    .maker-card h3 { font-size:43px; line-height:.93; letter-spacing:-.08em; max-width:280px; margin:16px 0; }
+    .maker-card p { max-width:300px; font-size:14px; line-height:1.6; }
+    .maker-card .mono { opacity:.7; }
+    .custom { padding-top:30px; }
+    .custom-box { display:grid; grid-template-columns:.8fr 1.2fr; gap:70px; border-top:1px solid var(--line); padding-top:74px; }
+    .custom h2 { font-size:clamp(40px,5vw,62px); line-height:.95; letter-spacing:-.08em; margin:12px 0 25px; }
+    .custom-copy { color:var(--muted); line-height:1.7; max-width:330px; }
+    form { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    label { display:flex; flex-direction:column; gap:8px; color:var(--muted); font-size:11px; font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:.1em; }
+    input, textarea { border:1px solid var(--line); background:#211e1a; color:var(--cream); padding:15px; border-radius:2px; outline:none; resize:vertical; }
+    input:focus, textarea:focus { border-color:var(--amber); }
+    .full { grid-column:1/-1; }
+    form .button { margin-top:5px; width:max-content; }
+    footer { border-top:1px solid var(--line); padding:30px 0; color:var(--muted); }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+    .footer-links { display:flex; gap:20px; }
+    .footer-links a:hover { color:var(--cream); }
+    .toast { position:fixed; z-index:50; left:50%; bottom:28px; transform:translate(-50%, 20px); opacity:0; pointer-events:none; background:var(--cream); color:var(--ink); padding:14px 20px; font-size:13px; box-shadow:0 12px 30px rgba(0,0,0,.35); transition:.3s var(--ease); }
+    .toast.show { opacity:1; transform:translate(-50%, 0); }
+    @media (max-width:800px) { .container { width:min(100% - 34px, 580px); } .nav-links { display:none; } .hero { grid-template-columns:1fr; gap:35px; padding-top:125px; min-height:auto; } .hero-visual { min-height:460px; } .hero-photo { width:76%; } .section-head, .story-grid, .custom-box { display:block; } .section-head p { margin-top:22px; } .products { grid-template-columns:1fr; } .story-grid > * + * { margin-top:42px; } .custom-box { padding-top:54px; } form { margin-top:45px; } }
+    @media (max-width:480px) { section { padding:80px 0; } h1 { font-size:54px; } .hero-copy { font-size:15px; } .hero-visual { min-height:390px; } .floating-tag { right:0; bottom:3%; } .stat-row { gap:22px; } .stat strong { font-size:25px; } form { grid-template-columns:1fr; } .full { grid-column:auto; } .footer-inner { align-items:flex-start; flex-direction:column; } }
+    @media (prefers-reduced-motion:reduce) { *, *:before, *:after { scroll-behavior:auto !important; transition:none !important; } }
+  </style>
 </head>
-<body class="bg-grid">
-
-    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#about" class="font-black text-xl italic tracking-tighter uppercase hover:text-blue-500 transition-colors cursor-pointer">3D FORGED</a>
-            
-            <div class="flex items-center gap-8">
-                <div class="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                    <a href="#about" class="hover:text-white transition-colors">Studio</a>
-                    <a href="#products" class="hover:text-white transition-colors">Market</a>
-                    <a href="#contact" class="hover:text-white transition-colors">Contact</a>
-                </div>
-                
-                <button onclick="toggleCart()" class="relative p-2 text-white hover:text-blue-500 transition-colors">
-                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-blue-600 text-[9px] font-black px-1.5 py-0.5 rounded-full opacity-0 transition-opacity">0</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <section class="h-[85vh] flex flex-col items-center justify-center text-center px-6">
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-gradient mb-6">Forge Your Reality.</h1>
-        <p class="max-w-xl text-zinc-400 text-lg font-medium leading-relaxed">
-            Industrial 3D fabrication meets AI-integrated electronics. We turn digital concepts into physical prototypes.
-        </p>
-        <div class="mt-8 flex gap-4">
-            <a href="#products" class="px-8 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-blue-600 hover:text-white transition-all">Browse Drops</a>
-            <a href="#contact" class="px-8 py-3 border border-white/20 text-white text-xs font-black uppercase tracking-widest rounded-full hover:bg-white/10 transition-all">Custom Order</a>
-        </div>
+<body>
+  <nav class="nav"><div class="container nav-inner"><a class="brand" href="#top" aria-label="Forge Tech home"><span class="brand-mark"></span>forge tech</a><div class="nav-links"><a href="#collection">Collection</a><a href="#studio">Studio</a><a href="#custom">Custom</a></div><a class="nav-cta" href="#custom">Start a build <span aria-hidden="true">↗</span></a></div></nav>
+  <main id="top">
+    <section class="hero container">
+      <div><div class="eyebrow mono">Small-batch light objects</div><h1>Light, <em>printed</em> differently.</h1><p class="hero-copy">Expressive ambient lamps, made layer by layer. Designed for desks, bedrooms, gaming setups and the corners that deserve a little more glow.</p><div class="actions"><a class="button primary" href="#collection">Shop the first drop <span>↗</span></a><a class="button ghost" href="#custom">Make it yours</a></div></div>
+      <div class="hero-visual"><div class="orbit" aria-hidden="true"></div><img class="hero-photo" src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85" alt="Warm glowing table lamp in a dark interior" /><div class="floating-tag"><strong>01 / 05</strong><span class="mono">first glow collection</span></div></div>
     </section>
-
-    <section id="about" class="py-32 px-6 bg-zinc-950/30 border-y border-white/5">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div class="reveal">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000" alt="The Forge Studio" class="rounded-[2rem] border border-white/10 shadow-2xl opacity-80 hover:opacity-100 transition-opacity duration-500">
-            </div>
-            <div class="reveal space-y-6" style="transition-delay: 0.2s;">
-                <span class="text-blue-500 font-bold text-[10px] uppercase tracking-[0.4em]">The Vision</span>
-                <h2 class="text-4xl font-black tracking-tighter">Localized Engineering. <br>Global Imagination.</h2>
-                <p class="text-zinc-400 leading-relaxed font-medium">
-                    Born at the intersection of vintage hardware logic and futuristic fabrication, 3D Forged is more than a print shop. We are a specialized studio dedicated to cinematic accuracy and smart integration.
-                </p>
-                <div class="pt-4 flex gap-8">
-                    <div><p class="text-white font-black text-2xl">100+</p><p class="text-zinc-600 text-[10px] uppercase font-bold">Builds Completed</p></div>
-                    <div><p class="text-white font-black text-2xl">0.1mm</p><p class="text-zinc-600 text-[10px] uppercase font-bold">Print Precision</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" class="py-32 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-end mb-16 reveal">
-                <div>
-                    <span class="text-zinc-500 font-bold text-[10px] uppercase tracking-[0.4em] mb-2 block">The Inventory</span>
-                    <h2 class="text-5xl font-black tracking-tighter">Current Drops.</h2>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal group">
-                    <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1620067925093-801122ac1408?w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <h3 class="font-bold text-sm mb-1 uppercase tracking-tight">MK-1 Cyber Visor</h3>
-                    <p class="text-blue-500 font-mono text-xs mb-4">₹12,499</p>
-                    <button onclick="addToCart('MK-1 Cyber Visor', 12499)" class="w-full py-2 bg-white text-black rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Add to Cart</button>
-                </div>
-
-                <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal" style="transition-delay: 0.1s;">
-                    <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden relative">
-                         <img src="https://images.unsplash.com/photo-1535136029863-4a3813f13988?w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-70">
-                    </div>
-                    <h3 class="font-bold text-sm mb-1 uppercase tracking-tight">Neural Core Prop</h3>
-                    <p class="text-blue-500 font-mono text-xs mb-4">₹8,500</p>
-                    <button onclick="addToCart('Neural Core Prop', 8500)" class="w-full py-2 bg-white text-black rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Add to Cart</button>
-                </div>
-
-                <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal" style="transition-delay: 0.2s;">
-                    <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
-                        <i data-lucide="plus" class="text-zinc-800 w-12 h-12"></i>
-                    </div>
-                    <h3 class="font-bold text-sm mb-1 uppercase tracking-tight text-zinc-600">Custom Request</h3>
-                    <p class="text-zinc-700 font-mono text-xs mb-4">Quote Only</p>
-                    <a href="#contact" class="block w-full text-center py-2 bg-blue-600 rounded-xl text-[9px] font-black uppercase tracking-widest text-white hover:bg-blue-500 transition-all">Consult Architect</a>
-                </div>
-
-                <div class="product-card bg-zinc-900/40 border border-white/5 rounded-3xl p-4 reveal" style="transition-delay: 0.3s;">
-                    <div class="aspect-square bg-black rounded-2xl mb-4 overflow-hidden relative">
-                         <img src="https://images.unsplash.com/photo-1590959651373-a3db0f38a961?w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-70">
-                    </div>
-                    <h3 class="font-bold text-sm mb-1 uppercase tracking-tight">Armor Plate Set</h3>
-                    <p class="text-blue-500 font-mono text-xs mb-4">₹15,200</p>
-                    <button onclick="addToCart('Armor Plate Set', 15200)" class="w-full py-2 bg-white text-black rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Add to Cart</button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-32 px-6">
-        <div class="max-w-4xl mx-auto bg-white text-black rounded-[3rem] p-10 md:p-20 reveal">
-            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4 block">Neural Input Required</span>
-            <h2 class="text-4xl md:text-6xl font-black tracking-tighter mb-10">Consult the Architect.</h2>
-            <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" class="space-y-6">
-                <textarea name="message" class="w-full bg-zinc-100 rounded-3xl p-6 text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none transition-all" rows="4" placeholder="Describe your prop specs (e.g. 'Cyberpunk mask with purple OLED and LEDs')"></textarea>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="email" name="email" class="bg-zinc-100 rounded-2xl p-4 text-sm" placeholder="Your Email" required>
-                    <button type="submit" class="bg-black text-white font-bold rounded-2xl py-4 hover:bg-zinc-800 transition-all uppercase text-[10px] tracking-widest">Transmit Specs</button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-zinc-950 z-[100] border-l border-white/10 shadow-2xl p-8 flex flex-col">
-        <div class="flex justify-between items-center mb-10">
-            <h2 class="text-2xl font-black tracking-tighter">Your Forge</h2>
-            <button onclick="toggleCart()" class="text-zinc-500 hover:text-white"><i data-lucide="x"></i></button>
-        </div>
-
-        <div id="cart-items" class="flex-grow overflow-y-auto space-y-6">
-            <p class="text-zinc-500 text-sm italic">No schematics selected yet.</p>
-        </div>
-
-        <div class="mt-6 p-4 bg-blue-900/10 border border-blue-500/20 rounded-2xl">
-            <div class="flex gap-3 mb-2">
-                <i data-lucide="shield-alert" class="text-blue-400 w-5 h-5"></i>
-                <span class="text-blue-400 font-black text-[10px] uppercase tracking-widest">Hardware Policy</span>
-            </div>
-            <p class="text-[10px] text-zinc-400 leading-relaxed">
-                Every unit is custom-forged. Due to high hardware costs, we accept **Pre-paid Online Payments only**. Cash on Delivery (COD) is not available.
-            </p>
-        </div>
-
-        <div class="mt-8 pt-8 border-t border-white/10">
-            <div class="flex justify-between mb-6">
-                <span class="text-zinc-500 uppercase font-bold text-[10px]">Estimated Total</span>
-                <span id="cart-total" class="text-xl font-black">₹0</span>
-            </div>
-            <button onclick="showPayment()" class="w-full py-4 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:bg-blue-500 transition-all">Secure Checkout</button>
-        </div>
-    </div>
-
-    <div id="payment-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[110] hidden items-center justify-center p-6">
-        <div class="bg-zinc-900 border border-white/10 p-10 rounded-[3rem] max-w-md w-full text-center relative">
-            <button onclick="closePayment()" class="absolute top-8 right-8 text-zinc-600 hover:text-white"><i data-lucide="x"></i></button>
-            
-            <i data-lucide="scan-line" class="mx-auto mb-6 text-blue-500 w-12 h-12"></i>
-            <h3 class="text-2xl font-black mb-2">Initialize Transfer</h3>
-            <p class="text-zinc-500 text-xs mb-8">Scan or use the UPI ID below to complete your order.</p>
-            
-            
-            <div class="bg-white p-2 rounded-3xl mb-6 inline-block shadow-[0_0_30px_rgba(59,130,246,0.3)]">
-    <img src="Picsart_25-12-26_21-22-27-830.png" alt="Scan to Pay" class="w-48 h-48 object-contain rounded-2xl">
-            </div>
-
-            <div class="bg-black/50 p-4 rounded-2xl border border-white/5 mb-8">
-                <p class="text-[10px] text-zinc-500 uppercase mb-1">UPI ID</p>
-                <p class="font-mono text-blue-400 text-lg">not.g3nos-2@okhdfcbank</p>
-            </div>
-
-            <p class="text-[10px] text-zinc-400 mb-8 border-t border-white/5 pt-4">
-                <span class="text-blue-500 font-bold uppercase">Next Step:</span><br>
-                Please take a screenshot of your payment and DM it to us on Instagram to confirm your build slot.
-            </p>
-            
-            <a href="https://www.instagram.com/who.ar3s/" target="_blank" class="block w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl text-xs uppercase tracking-widest hover:opacity-90 transition-all">
-                Send Proof on Instagram
-            </a>
-        </div>
-    </div>
-
-    <footer class="py-24 text-center border-t border-white/10 bg-black">
-        <div class="flex justify-center gap-12 mb-10">
-            <a href="https://www.instagram.com/who.ar3s/" target="_blank" class="text-white hover:text-purple-400 transition-all duration-300 transform hover:scale-125">
-                <i data-lucide="instagram" class="w-8 h-8 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"></i>
-            </a>
-            <a href="https://x.com/yourusername/" target="_blank" class="text-white hover:text-cyan-400 transition-all duration-300 transform hover:scale-125">
-                <i data-lucide="x" class="w-8 h-8 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"></i>
-            </a>
-            <a href="https://github.com/g3nosss/" target="_blank" class="text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-125">
-                <i data-lucide="github" class="w-8 h-8 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"></i>
-            </a>
-        </div>
-        <p class="text-[10px] text-zinc-500 font-bold tracking-[0.5em] uppercase italic">
-            © 2025 FORGED TECH // ENGINEERING // ALL RIGHTS RESERVED
-        </p>
-    </footer>
-
-    <script>
-        lucide.createIcons();
-        let cart = [];
-        const cartDrawer = document.getElementById('cart-drawer');
-        const cartItems = document.getElementById('cart-items');
-        const cartCount = document.getElementById('cart-count');
-        const cartTotal = document.getElementById('cart-total');
-        const paymentModal = document.getElementById('payment-modal');
-
-        function toggleCart() { cartDrawer.classList.toggle('open'); }
-        
-        function addToCart(name, price) {
-            cart.push({name, price});
-            updateCartUI();
-            if(!cartDrawer.classList.contains('open')) toggleCart();
-        }
-
-        function updateCartUI() {
-            cartCount.innerText = cart.length;
-            cartCount.classList.remove('opacity-0');
-            if(cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-zinc-500 text-sm italic">No schematics selected yet.</p>';
-                cartCount.classList.add('opacity-0');
-            } else {
-                cartItems.innerHTML = cart.map((item, index) => `
-                    <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                        <div><p class="text-sm font-bold uppercase">${item.name}</p><p class="text-blue-500 text-xs font-mono">₹${item.price.toLocaleString()}</p></div>
-                        <button onclick="removeItem(${index})" class="text-zinc-600 hover:text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                    </div>`).join('');
-                lucide.createIcons();
-            }
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            cartTotal.innerText = '₹' + total.toLocaleString();
-        }
-
-        function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
-        
-        function showPayment() {
-            if(cart.length === 0) return alert("Your cart is empty!");
-            paymentModal.classList.remove('hidden'); paymentModal.classList.add('flex'); toggleCart();
-        }
-        function closePayment() { paymentModal.classList.add('hidden'); paymentModal.classList.remove('flex'); }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-    </script>
+    <div class="ticker mono"><div class="ticker-inner"><span>Made to order <i class="dot">●</i></span><span>Custom colours <i class="dot">●</i></span><span>Low-voltage LED <i class="dot">●</i></span><span>Printed in India <i class="dot">●</i></span></div></div>
+    <section id="collection" class="container"><div class="section-head"><div><div class="eyebrow mono">The first glow collection</div><h2>Pick your mood.</h2></div><p>Three starting points for your space. Every piece is made after you order, so we can tune the colour and finish to you.</p></div><div class="products">
+      <article class="product"><div class="product-image"><span class="badge mono">Bestseller</span><img src="https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=800&q=85" alt="Minimal amber table lamp" /></div><div class="product-info"><div><h3>The Halo</h3><p>Soft edge light · 18 cm</p></div><div class="price">₹1,499</div></div></article>
+      <article class="product"><div class="product-image"><span class="badge mono">New</span><img src="https://images.unsplash.com/photo-1534281309984-a77d2bfae1a4?auto=format&fit=crop&w=800&q=85" alt="Sculptural orange lamp" /></div><div class="product-info"><div><h3>Orbit 01</h3><p>Sculptural glow · 22 cm</p></div><div class="price">₹1,899</div></div></article>
+      <article class="product"><div class="product-image"><img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=800&q=85" alt="Warm light on a bedside table" /></div><div class="product-info"><div><h3>Night Shift</h3><p>Desk mood light · 16 cm</p></div><div class="price">₹1,299</div></div></article>
+    </div></section>
+    <section id="studio" class="story"><div class="container story-grid"><div><div class="eyebrow mono">Why Forge Tech</div><h2>Built slowly.<br />Lit warmly.</h2><p>Every lamp starts as a digital shape and ends as a real object you can reach for. We prototype in-house, print in small batches and keep the details intentional — from the first layer to the final glow.</p><div class="stat-row"><div class="stat"><strong>0.2<span>mm</span></strong><span class="mono">layer detail</span></div><div class="stat"><strong>24<span>h</span></strong><span class="mono">typical dispatch</span></div><div class="stat"><strong>01</strong><span class="mono">maker studio</span></div></div></div><div class="maker-card"><div class="mono">The maker note</div><div><h3>Your space is the brief.</h3><p>Tell us the mood, colour or idea. We’ll turn it into a light object made for your corner of the world.</p></div><a class="mono" href="#custom">Request a custom lamp →</a></div></div></section>
+    <section id="custom" class="custom container"><div class="custom-box"><div><div class="eyebrow mono">Have a shape in mind?</div><h2>Let’s make it glow.</h2><p class="custom-copy">Names, initials, colour swaps or a shape that only exists in your head. Send a few details and we’ll reply with a build idea and quote.</p></div><form id="custom-form"><label>Name<input name="name" required placeholder="Your name" /></label><label>Contact<input name="contact" required placeholder="Email or WhatsApp" /></label><label class="full">Your idea<textarea name="idea" required rows="5" placeholder="Tell us what you want to light up..."></textarea></label><button class="button primary" type="submit">Send build brief <span>↗</span></button></form></div></section>
+  </main>
+  <footer><div class="container footer-inner"><div class="brand"><span class="brand-mark"></span>forge tech</div><div class="footer-links"><a href="#collection" class="mono">Shop</a><a href="#custom" class="mono">Custom</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="mono">Instagram ↗</a></div><div class="mono">© 2026 Forge Tech</div></div></footer>
+  <div id="toast" class="toast" role="status"></div>
+  <script>
+    const form = document.getElementById('custom-form');
+    const toast = document.getElementById('toast');
+    form.addEventListener('submit', (event) => { event.preventDefault(); toast.textContent = 'Thanks — your build brief is ready. We’ll be in touch soon.'; toast.classList.add('show'); form.reset(); setTimeout(() => toast.classList.remove('show'), 4500); });
+  </script>
 </body>
 </html>
