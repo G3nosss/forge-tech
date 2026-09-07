@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">3D Verse logo</title>
+  <desc id="desc">An amber orbit mark followed by the 3D Verse wordmark.</desc>
+  <g fill="none" stroke="#FF6B27" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="82" cy="90" r="49" stroke-width="12" opacity=".28"/>
+    <path d="M82 34a56 56 0 0 1 49 28M131 118a56 56 0 0 1-49 28M33 118a56 56 0 0 1 0-56" stroke-width="12"/>
+    <path d="M50 90h64M82 58v64" stroke-width="9" opacity=".9"/>
+  </g>
+  <text x="165" y="114" fill="#F6F1E8" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="800" letter-spacing="-3">3D VERSE</text>
+</svg>

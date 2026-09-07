@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Forge Tech makes expressive 3D-printed ambient lamps and custom lights, made to order." />
-  <title>Forge Tech — Light, printed differently.</title>
+  <meta name="description" content="3D Verse makes expressive 3D-printed ambient lamps, desk objects and original collectibles, made to order." />
+  <title>3D Verse — Light, printed differently.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -18,15 +18,19 @@
     button { cursor:pointer; }
     .container { width:min(1160px, calc(100% - 48px)); margin:0 auto; }
     .mono { font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:.12em; font-size:11px; }
+    .scroll-progress { position:fixed; z-index:30; top:0; left:0; height:3px; width:0; background:var(--amber); box-shadow:0 0 14px var(--amber); }
     .nav { position:fixed; z-index:20; top:0; width:100%; background:rgba(23,21,18,.82); backdrop-filter:blur(18px); border-bottom:1px solid var(--line); }
     .nav-inner { height:76px; display:flex; align-items:center; justify-content:space-between; }
     .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.05em; font-size:20px; }
-    .brand-mark { width:25px; height:25px; border-radius:50%; border:7px solid var(--amber); box-shadow:0 0 20px rgba(255,107,39,.35); }
+    .brand-logo { width:132px; height:auto; display:block; }
+    .brand-mark { width:25px; height:25px; border-radius:50%; border:7px solid var(--amber); box-shadow:0 0 20px rgba(255,107,39,.35); position:relative; }
+    .brand-mark:after { content:''; position:absolute; width:6px; height:6px; background:var(--cream); border-radius:50%; top:3px; left:3px; }
     .nav-links { display:flex; gap:28px; color:var(--muted); font-size:13px; font-weight:600; }
     .nav-links a:hover { color:var(--cream); }
     .nav-cta { border:1px solid var(--line); padding:11px 16px; border-radius:30px; font-size:12px; font-weight:700; transition:.2s var(--ease); }
     .nav-cta:hover { background:var(--cream); color:var(--ink); }
     .hero { min-height:780px; padding:150px 0 100px; position:relative; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; overflow:hidden; }
+    .hero-copy-wrap, .hero-visual { will-change:transform; }
     .hero:before { content:''; position:absolute; width:700px; height:700px; border-radius:50%; right:-210px; top:55px; background:radial-gradient(circle, rgba(255,107,39,.28), transparent 63%); filter:blur(10px); pointer-events:none; }
     .eyebrow { display:flex; align-items:center; gap:10px; color:var(--amber-soft); margin-bottom:24px; }
     .eyebrow:before { content:''; width:34px; height:1px; background:var(--amber); }
@@ -56,6 +60,8 @@
     .category-pill { border:1px solid var(--line); color:var(--muted); padding:10px 14px; border-radius:30px; font-size:11px; font-weight:700; transition:.2s var(--ease); }
     .category-pill:hover { border-color:var(--amber); color:var(--amber-soft); }
     .category-section { margin-top:72px; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.is-visible { opacity:1; transform:translateY(0); }
     .category-label { display:flex; align-items:center; gap:12px; color:var(--amber-soft); margin-bottom:20px; }
     .category-label:after { content:''; height:1px; flex:1; background:var(--line); }
     .category-title { font-size:27px; letter-spacing:-.06em; margin:0 0 21px; }
@@ -104,41 +110,48 @@
   </style>
 </head>
 <body>
-  <nav class="nav"><div class="container nav-inner"><a class="brand" href="#top" aria-label="Forge Tech home"><span class="brand-mark"></span>forge tech</a><div class="nav-links"><a href="#collection">Collection</a><a href="#studio">Studio</a><a href="#custom">Custom</a></div><a class="nav-cta" href="#custom">Start a build <span aria-hidden="true">↗</span></a></div></nav>
+  <div class="scroll-progress" aria-hidden="true"></div><nav class="nav"><div class="container nav-inner"><a class="brand" href="#top" aria-label="3D Verse home"><img class="brand-logo" src="3d-verse-logo.svg" alt="3D Verse" /></a><div class="nav-links"><a href="#collection">Collection</a><a href="#studio">Studio</a><a href="#custom">Custom</a></div><a class="nav-cta" href="#custom">Start a build <span aria-hidden="true">↗</span></a></div></nav>
   <main id="top">
     <section class="hero container">
-      <div><div class="eyebrow mono">Small-batch light objects</div><h1>Light, <em>printed</em> differently.</h1><p class="hero-copy">Expressive ambient lamps, made layer by layer. Designed for desks, bedrooms, gaming setups and the corners that deserve a little more glow.</p><div class="actions"><a class="button primary" href="#collection">Shop the first drop <span>↗</span></a><a class="button ghost" href="#custom">Make it yours</a></div></div>
+      <div class="hero-copy-wrap"><div class="eyebrow mono">Small-batch light objects</div><h1>Light, <em>printed</em> differently.</h1><p class="hero-copy">Expressive ambient lamps, made layer by layer. Designed for desks, bedrooms, gaming setups and the corners that deserve a little more glow.</p><div class="actions"><a class="button primary" href="#collection">Shop the first drop <span>↗</span></a><a class="button ghost" href="#custom">Make it yours</a></div></div>
       <div class="hero-visual"><div class="orbit" aria-hidden="true"></div><img class="hero-photo" src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85" alt="Warm glowing table lamp in a dark interior" /><div class="floating-tag"><strong>01 / 05</strong><span class="mono">first glow collection</span></div></div>
     </section>
     <div class="ticker mono"><div class="ticker-inner"><span>Made to order <i class="dot">●</i></span><span>Custom colours <i class="dot">●</i></span><span>Low-voltage LED <i class="dot">●</i></span><span>Printed in India <i class="dot">●</i></span></div></div>
-    <section id="collection" class="container"><div class="section-head"><div><div class="eyebrow mono">The Forge Tech catalogue</div><h2>Made for your corner.</h2></div><p>Browse by use. Every piece is made after you order, so we can tune the colour and finish to you.</p></div>
+    <section id="collection" class="container reveal"><div class="section-head"><div><div class="eyebrow mono">The 3D Verse catalogue</div><h2>Made for your corner.</h2></div><p>Browse by use. Every piece is made after you order, so we can tune the colour and finish to you.</p></div>
       <div class="category-nav"><a class="category-pill" href="#lamps">01 · Ambient Lamps</a><a class="category-pill" href="#desk">02 · Gaming Desk Gear</a><a class="category-pill" href="#collectibles">03 · Collectibles</a><a class="category-pill" href="#custom">04 · Custom Builds</a></div>
-      <div id="lamps" class="category-section"><div class="category-label mono">01 / ambient lamps</div><h3 class="category-title">Warm light, interesting shapes.</h3><div class="products">
+      <div id="lamps" class="category-section reveal"><div class="category-label mono">01 / ambient lamps</div><h3 class="category-title">Warm light, interesting shapes.</h3><div class="products">
         <article class="product"><div class="product-image"><span class="badge mono">Bestseller</span><img src="https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=800&q=85" alt="Minimal amber table lamp" /></div><div class="product-info"><div><h3>The Halo</h3><p>Soft edge light · 18 cm</p></div><div class="price">₹1,499</div></div></article>
         <article class="product"><div class="product-image"><span class="badge mono">New</span><img src="https://images.unsplash.com/photo-1534281309984-a77d2bfae1a4?auto=format&fit=crop&w=800&q=85" alt="Sculptural orange lamp" /></div><div class="product-info"><div><h3>Orbit 01</h3><p>Sculptural glow · 22 cm</p></div><div class="price">₹1,899</div></div></article>
         <article class="product"><div class="product-image"><img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=800&q=85" alt="Warm light on a bedside table" /></div><div class="product-info"><div><h3>Night Shift</h3><p>Desk mood light · 16 cm</p></div><div class="price">₹1,299</div></div></article>
       </div></div>
-      <div id="desk" class="category-section"><div class="category-label mono">02 / gaming desk gear</div><h3 class="category-title">Better setups start with the details.</h3><div class="products">
+      <div id="desk" class="category-section reveal"><div class="category-label mono">02 / gaming desk gear</div><h3 class="category-title">Better setups start with the details.</h3><div class="products">
         <article class="product"><div class="product-image"><span class="badge mono">Desk pick</span><img src="https://images.unsplash.com/photo-1593642532400-2682810df593?auto=format&fit=crop&w=800&q=85" alt="Gaming desk setup with ambient lighting" /></div><div class="product-info"><div><h3>Dock Light</h3><p>Headphone stand base · RGB</p></div><div class="price">₹1,799</div></div></article>
         <article class="product"><div class="product-image"><img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=800&q=85" alt="Colourful geometric desk lamp" /></div><div class="product-info"><div><h3>Pixel Core</h3><p>Grid cube light · USB-C</p></div><div class="price">₹1,699</div></div></article>
         <article class="product"><div class="product-image"><img src="https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?auto=format&fit=crop&w=800&q=85" alt="Modern black desk accessory" /></div><div class="product-info"><div><h3>Racing Line</h3><p>Aero desk sculpture · 24 cm</p></div><div class="price">₹1,399</div></div></article>
       </div></div>
-      <div id="collectibles" class="category-section"><div class="category-label mono">03 / collectibles</div><h3 class="category-title">Characters for the shelf, made original.</h3><div class="products">
+      <div id="collectibles" class="category-section reveal"><div class="category-label mono">03 / collectibles</div><h3 class="category-title">Characters for the shelf, made original.</h3><div class="products">
         <article class="product"><div class="product-image"><span class="badge mono">Limited</span><img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=85" alt="Dark sculptural collectible figure" /></div><div class="product-info"><div><h3>Night Sentinel</h3><p>Original warrior figure · 18 cm</p></div><div class="price">₹1,999</div></div></article>
         <article class="product"><div class="product-image"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=800&q=85" alt="Sculptural display object" /></div><div class="product-info"><div><h3>Void Guardian</h3><p>Desk sculpture · matte finish</p></div><div class="price">₹1,599</div></div></article>
         <article class="product"><div class="product-image"><img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&w=800&q=85" alt="Small collectible object on a shelf" /></div><div class="product-info"><div><h3>Forge Mascot</h3><p>Small-batch desk buddy · 10 cm</p></div><div class="price">₹899</div></div></article>
       </div></div>
-      <div class="category-section"><div class="category-label mono">04 / custom builds</div><h3 class="category-title">Your idea, layer by layer.</h3><div class="maker-card" style="min-height:260px"><div class="mono">Custom commission</div><div><h3>Names, icons, shapes, gifts.</h3><p>Send us a reference or just a mood. We’ll reply with a build idea, timeline and quote.</p></div><a class="mono" href="#custom">Start a custom brief →</a></div></div>
+      <div class="category-section reveal"><div class="category-label mono">04 / custom builds</div><h3 class="category-title">Your idea, layer by layer.</h3><div class="maker-card" style="min-height:260px"><div class="mono">Custom commission</div><div><h3>Names, icons, shapes, gifts.</h3><p>Send us a reference or just a mood. We’ll reply with a build idea, timeline and quote.</p></div><a class="mono" href="#custom">Start a custom brief →</a></div></div>
     </section>
-    <section id="studio" class="story"><div class="container story-grid"><div><div class="eyebrow mono">Why Forge Tech</div><h2>Built slowly.<br />Lit warmly.</h2><p>Every lamp starts as a digital shape and ends as a real object you can reach for. We prototype in-house, print in small batches and keep the details intentional — from the first layer to the final glow.</p><div class="stat-row"><div class="stat"><strong>0.2<span>mm</span></strong><span class="mono">layer detail</span></div><div class="stat"><strong>24<span>h</span></strong><span class="mono">typical dispatch</span></div><div class="stat"><strong>01</strong><span class="mono">maker studio</span></div></div></div><div class="maker-card"><div class="mono">The maker note</div><div><h3>Your space is the brief.</h3><p>Tell us the mood, colour or idea. We’ll turn it into a light object made for your corner of the world.</p></div><a class="mono" href="#custom">Request a custom lamp →</a></div></div></section>
-    <section id="custom" class="custom container"><div class="custom-box"><div><div class="eyebrow mono">Have a shape in mind?</div><h2>Let’s make it glow.</h2><p class="custom-copy">Names, initials, colour swaps or a shape that only exists in your head. Send a few details and we’ll reply with a build idea and quote.</p></div><form id="custom-form"><label>Name<input name="name" required placeholder="Your name" /></label><label>Contact<input name="contact" required placeholder="Email or WhatsApp" /></label><label class="full">Your idea<textarea name="idea" required rows="5" placeholder="Tell us what you want to light up..."></textarea></label><button class="button primary" type="submit">Send build brief <span>↗</span></button></form></div></section>
+    <section id="studio" class="story reveal"><div class="container story-grid"><div><div class="eyebrow mono">Why 3D Verse</div><h2>Built slowly.<br />Lit warmly.</h2><p>Every lamp starts as a digital shape and ends as a real object you can reach for. We prototype in-house, print in small batches and keep the details intentional — from the first layer to the final glow.</p><div class="stat-row"><div class="stat"><strong>0.2<span>mm</span></strong><span class="mono">layer detail</span></div><div class="stat"><strong>24<span>h</span></strong><span class="mono">typical dispatch</span></div><div class="stat"><strong>01</strong><span class="mono">maker studio</span></div></div></div><div class="maker-card"><div class="mono">The maker note</div><div><h3>Your space is the brief.</h3><p>Tell us the mood, colour or idea. We’ll turn it into a light object made for your corner of the world.</p></div><a class="mono" href="#custom">Request a custom lamp →</a></div></div></section>
+    <section id="custom" class="custom container reveal"><div class="custom-box"><div><div class="eyebrow mono">Have a shape in mind?</div><h2>Let’s make it glow.</h2><p class="custom-copy">Names, initials, colour swaps or a shape that only exists in your head. Send a few details and we’ll reply with a build idea and quote.</p></div><form id="custom-form"><label>Name<input name="name" required placeholder="Your name" /></label><label>Contact<input name="contact" required placeholder="Email or WhatsApp" /></label><label class="full">Your idea<textarea name="idea" required rows="5" placeholder="Tell us what you want to light up..."></textarea></label><button class="button primary" type="submit">Send build brief <span>↗</span></button></form></div></section>
   </main>
-  <footer><div class="container footer-inner"><div class="brand"><span class="brand-mark"></span>forge tech</div><div class="footer-links"><a href="#collection" class="mono">Shop</a><a href="#custom" class="mono">Custom</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="mono">Instagram ↗</a></div><div class="mono">© 2026 Forge Tech</div></div></footer>
+  <footer><div class="container footer-inner"><div class="brand"><img class="brand-logo" src="3d-verse-logo.svg" alt="3D Verse" /></div><div class="footer-links"><a href="#collection" class="mono">Shop</a><a href="#custom" class="mono">Custom</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="mono">Instagram ↗</a></div><div class="mono">© 2026 3D Verse</div></div></footer>
   <div id="toast" class="toast" role="status"></div>
   <script>
     const form = document.getElementById('custom-form');
     const toast = document.getElementById('toast');
     form.addEventListener('submit', (event) => { event.preventDefault(); toast.textContent = 'Thanks — your build brief is ready. We’ll be in touch soon.'; toast.classList.add('show'); form.reset(); setTimeout(() => toast.classList.remove('show'), 4500); });
+    const progress = document.querySelector('.scroll-progress');
+    const heroVisual = document.querySelector('.hero-visual');
+    const heroCopy = document.querySelector('.hero-copy-wrap');
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+    reveals.forEach((item, index) => { item.style.transitionDelay = `${Math.min(index * 70, 280)}ms`; observer.observe(item); });
+    window.addEventListener('scroll', () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = `${max ? (window.scrollY / max) * 100 : 0}%`; if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; const shift = Math.min(window.scrollY * .08, 35); heroVisual.style.transform = `translateY(${shift}px)`; heroCopy.style.transform = `translateY(${Math.min(window.scrollY * -.035, 16)}px)`; }, { passive:true });
   </script>
 </body>
 </html>
